@@ -1,0 +1,592 @@
+#:import Snackbar kivymd.uix.snackbar.Snackbar
+<CustomSnackbar>
+    MDIconButton:
+        pos_hint: {'center_y': .5}
+        icon: root.icon
+        opposite_colors: True
+        on_release: root.open_icon_snackbar()
+
+    MDLabel:
+        id: text_bar
+        size_hint_y: None
+        height: self.texture_size[1]
+        text: root.text
+        font_size: root.font_size
+        theme_text_color: 'Custom'
+        text_color: 'ffffff'
+        shorten: True
+        shorten_from: 'right'
+        pos_hint: {'center_y': .5}
+
+
+<MainLayout>:  
+    screen_manager: screen_manager1
+    ScreenManager:
+        id: screen_manager1
+
+        Screen:
+            id: login_screen
+            name: "login_screen"
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: "130dp"
+                spacing: "20dp"
+                MDLabel:
+                    text: "Login Screen"
+                    halign: "center"
+                MDTextField:
+                    id: log_username
+                    hint_text: "username"
+                MDTextField:
+                    id: log_password
+                    hint_text: "password"
+                    password: True
+                MDRoundFlatButton:
+                    text:"Sign In"
+                    size_hint: 0.4, 0.1
+                    pos_hint: {"center_x": 0.5}
+                    on_press: root.login()
+                MDRoundFlatButton:
+                    text:"Register Here"
+                    size_hint: 0.4, 0.1
+                    pos_hint: {"center_x": 0.5}
+                    on_press: root.press("reg_screen", 'left')
+                       
+    
+
+        Screen:
+            id: registration_screen
+            name: "reg_screen"
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: "130dp"
+                spacing: "20dp"
+                MDLabel:
+                    text: "Registration Screen"
+                    halign: "center"
+                MDTextField:
+                    id: username
+                    hint_text: "username"
+                MDTextField:
+                    id: firstname
+                    hint_text: "First Name"
+                MDTextField:
+                    id: lastname
+                    hint_text: "Last Name"
+                MDTextField:
+                    id: email
+                    hint_text: "Email"
+                    validator: 'email'
+                    helper_text: 'email format required'
+                    helper_text_mode: 'on_error'
+                MDTextField:
+                    id: password
+                    hint_text: "password"
+                    password: True
+                MDRoundFlatButton:
+                    text:"Sign Up"
+                    size_hint: 0.4, 0.1
+                    pos_hint: {"center_x": 0.5, "y": 0.5}
+                    on_press: 
+                        root.press ("login_screen", 'left')
+                        root.register()
+            
+
+        Screen:
+            id: dashboard_screen
+            name: "dashboard_screen"
+
+            MDBoxLayout:
+                orientation: "vertical"
+                size: root.size
+                MDTopAppBar:
+                    
+                    id: toolbar
+                    title: "HOME"
+                    left_action_items: [["menu"]]
+                    right_action_items: [["dots-vertical"],["theme-light-dark", lambda x: root.press ("login_screen", 'left')]]
+
+                MDBottomNavigation:
+                    panel_color: app.theme_cls.primary_color
+                    selected_color_background: None
+                    text_color_active: app.theme_cls.primary_dark
+                    text_color_normal: 1,1,1,1
+                    use_text: False
+                    transition_duration: 0.9 #animate a fade in screen switch
+
+                    MDBottomNavigationItem:
+                        name: 'screen 1'
+                        icon: 'home-outline'
+                        on_tab_press: root.changetitle("HOME")
+                        #badge_icon: "numeric-10"
+                        
+                        ScrollView:
+                            do_scroll_y: True
+                            do_scroll_x: False
+                            MDGridLayout:
+                                cols: 2
+                                padding: '15dp'
+                                spacing: '10dp'
+                                height: self.minimum_height
+                                width: self.minimum_width
+                                size_hint_y: None
+                                MDCard:
+                                    size_hint: None,None
+                                    size: "350dp","300dp"
+                                    padding: 4
+                                    pos_hint: {'center_x': 0.5}
+                                    radius: "4dp"  
+                                    style: "elevated"
+                                    MDBoxLayout:
+                                        orientation: 'vertical'
+                                        FitImage:
+                                            source: 'https://picsum.photos/id/26/280/350'
+                                            radius: "6dp"
+                                            allow_stretch: True
+                                            keep_ratio: False
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            size_hint_y: 0.3
+                                            padding: 10
+                                            MDLabel:
+                                                text: 'Tools'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True                                        
+                                                font_size: '25sp'                              
+                                                size_hint_y: 0.6
+                                            MDLabel:
+                                                text: '6.7 MB'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True
+                                                font_size: '16sp'
+                                                theme_text_color: 'Secondary'                              
+                                                size_hint_y: 0.4
+                                MDCard:
+                                    size_hint: None,None
+                                    size: "350dp","300dp"
+                                    padding: 4
+                                    pos_hint: {'center_x': 0.5}
+                                    radius: "4dp"  
+                                    style: "elevated"
+                                    MDBoxLayout:
+                                        orientation: 'vertical'
+                                        FitImage:
+                                            source: 'https://picsum.photos/id/26/280/350'
+                                            radius: "6dp"
+                                            allow_stretch: True
+                                            keep_ratio: False
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            size_hint_y: 0.3
+                                            padding: 10
+                                            MDLabel:
+                                                text: ' Tools'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True                                        
+                                                font_size: '25sp'                              
+                                                size_hint_y: 0.6
+                                            MDLabel:
+                                                text: '6.7 MB'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True
+                                                font_size: '16sp'
+                                                theme_text_color: 'Secondary'                              
+                                                size_hint_y: 0.4
+                                MDCard:
+                                    size_hint: None,None
+                                    size: "350dp","300dp"
+                                    padding: 4
+                                    pos_hint: {'center_x': 0.5}
+                                    radius: "4dp"  
+                                    style: "elevated"
+                                    MDBoxLayout:
+                                        orientation: 'vertical'
+                                        FitImage:
+                                            source: 'https://picsum.photos/id/26/280/350'
+                                            radius: "6dp"
+                                            allow_stretch: True
+                                            keep_ratio: False
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            size_hint_y: 0.3
+                                            padding: 10
+                                            MDLabel:
+                                                text: 'Tools'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True                                        
+                                                font_size: '25sp'                              
+                                                size_hint_y: 0.6
+                                            MDLabel:
+                                                text: '6.7 MB'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True
+                                                font_size: '16sp'
+                                                theme_text_color: 'Secondary'                              
+                                                size_hint_y: 0.4
+                                MDCard:
+                                    size_hint: None,None
+                                    size: "350dp","300dp"
+                                    padding: 4
+                                    pos_hint: {'center_x': 0.5}
+                                    radius: "4dp"  
+                                    style: "elevated"
+                                    MDBoxLayout:
+                                        orientation: 'vertical'
+                                        FitImage:
+                                            source: 'https://picsum.photos/id/26/280/350'
+                                            radius: "6dp"
+                                            allow_stretch: True
+                                            keep_ratio: False
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            size_hint_y: 0.3
+                                            padding: 10
+                                            MDLabel:
+                                                text: 'Tools'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True                                        
+                                                font_size: '25sp'                              
+                                                size_hint_y: 0.6
+                                            MDLabel:
+                                                text: '6.7 MB'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True
+                                                font_size: '16sp'
+                                                theme_text_color: 'Secondary'                              
+                                                size_hint_y: 0.4
+                                MDCard:
+                                    size_hint: None,None
+                                    size: "350dp","300dp"
+                                    padding: 4
+                                    pos_hint: {'center_x': 0.5}
+                                    radius: "4dp"  
+                                    style: "elevated"
+                                    MDBoxLayout:
+                                        orientation: 'vertical'
+                                        FitImage:
+                                            source: 'https://picsum.photos/id/26/280/350'
+                                            radius: "6dp"
+                                            allow_stretch: True
+                                            keep_ratio: False
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            size_hint_y: 0.3
+                                            padding: 10
+                                            MDLabel:
+                                                text: 'Tools'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True                                        
+                                                font_size: '25sp'                              
+                                                size_hint_y: 0.6
+                                            MDLabel:
+                                                text: '6.7 MB'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True
+                                                font_size: '16sp'
+                                                theme_text_color: 'Secondary'                              
+                                                size_hint_y: 0.4
+                                MDCard:
+                                    size_hint: None,None
+                                    size: "350dp","300dp"
+                                    padding: 4
+                                    pos_hint: {'center_x': 0.5}
+                                    radius: "4dp"  
+                                    style: "elevated"
+                                    MDBoxLayout:
+                                        orientation: 'vertical'
+                                        FitImage:
+                                            source: 'https://picsum.photos/id/26/280/350'
+                                            radius: "6dp"
+                                            allow_stretch: True
+                                            keep_ratio: False
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            size_hint_y: 0.3
+                                            padding: 10
+                                            MDLabel:
+                                                text: 'Tools'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True                                        
+                                                font_size: '25sp'                              
+                                                size_hint_y: 0.6
+                                            MDLabel:
+                                                text: '6.7 MB'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True
+                                                font_size: '16sp'
+                                                theme_text_color: 'Secondary'                              
+                                                size_hint_y: 0.4
+                                MDCard:
+                                    size_hint: None,None
+                                    size: "350dp","300dp"
+                                    padding: 4
+                                    pos_hint: {'center_x': 0.5}
+                                    radius: "4dp"  
+                                    style: "elevated"
+                                    MDBoxLayout:
+                                        orientation: 'vertical'
+                                        FitImage:
+                                            source: 'https://picsum.photos/id/26/280/350'
+                                            radius: "6dp"
+                                            allow_stretch: True
+                                            keep_ratio: False
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            size_hint_y: 0.3
+                                            padding: 10
+                                            MDLabel:
+                                                text: 'Tools'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True                                        
+                                                font_size: '25sp'                              
+                                                size_hint_y: 0.6
+                                            MDLabel:
+                                                text: '6.7 MB'
+                                                halign: 'left'
+                                                valign: 'top'
+                                                text_size: self.size
+                                                bold: True
+                                                font_size: '16sp'
+                                                theme_text_color: 'Secondary'                              
+                                                size_hint_y: 0.4
+    
+
+                        
+
+                    MDBottomNavigationItem:
+                        name: 'screen 2'
+                        icon: 'magnify'
+                        on_tab_press: root.changetitle("MOVIES")
+                        #badge_icon: "numeric-10"
+                        
+                        MDScreen:
+                            
+
+                            ScrollView:
+                                do_scroll_y: True
+                                do_scroll_x: False
+                                
+                                MDBoxLayout:
+                                    orientation: 'vertical'
+                                    padding: '20dp'
+                                    adaptive_height: True
+                                    MDLabel:
+                                        text: 'Playlist'
+                                        font_style:"H2"
+                                        adaptive_height: True
+                                        font_size: '30dp'
+                                    MDList:
+                                        text: "Single-line item with avatar"
+                                        secondary_text: "Khalil wakes up and finds"   
+                                    
+                                        TwoLineAvatarIconListItem:
+                                            text: "Spaced out"
+                                            secondary_text: "Khalil wakes up and finds"
+                                                                                    
+                                            ImageLeftWidget:
+                                                source: "https://picsum.photos/id/46/280/350"
+
+                                            IconRightWidget:
+                                                icon: "menu"
+    
+                                        TwoLineAvatarIconListItem:
+                                            text: "Spaced out"
+                                            secondary_text: "Khalil wakes up and finds"
+                                            ImageLeftWidget:
+                                                source: "https://picsum.photos/id/46/280/350"
+
+                                            IconRightWidget:
+                                                icon: "menu"
+
+                                        TwoLineAvatarIconListItem:
+                                            text: "Spaced out"
+                                            secondary_text: "Khalil wakes up and finds"
+                                            ImageLeftWidget:
+                                                source: "https://picsum.photos/id/46/280/350"
+
+                                            IconRightWidget:
+                                                icon: "menu"
+                                        TwoLineAvatarIconListItem:
+                                            text: "Spaced out"
+                                            secondary_text: "Khalil wakes up and finds"
+                                            ImageLeftWidget:
+                                                source: "https://picsum.photos/id/46/280/350"
+
+                                            IconRightWidget:
+                                                icon: "menu"
+
+                                        TwoLineAvatarIconListItem:
+                                            text: "Spaced out"
+                                            secondary_text: "Khalil wakes up and finds"
+                                            ImageLeftWidget:
+                                                source: "https://picsum.photos/id/46/280/350"
+
+                                            IconRightWidget:
+                                                icon: "menu"
+                                        TwoLineAvatarIconListItem:
+                                            text: "Spaced out"
+                                            secondary_text: "Khalil wakes up and finds"
+                                            ImageLeftWidget:
+                                                source: "https://picsum.photos/id/46/280/350"
+
+                                            IconRightWidget:
+                                                icon: "menu"
+                                        TwoLineAvatarIconListItem:
+                                            text: "Spaced out"
+                                            secondary_text: "Khalil wakes up and finds"
+                                            ImageLeftWidget:
+                                                source: "https://picsum.photos/id/46/280/350"
+
+                                            IconRightWidget:
+                                                icon: "menu"
+                                        TwoLineAvatarIconListItem:
+                                            text: "Spaced out"
+                                            secondary_text: "Khalil wakes up and finds"
+                                            ImageLeftWidget:
+                                                source: "https://picsum.photos/id/46/280/350"
+
+                                            IconRightWidget:
+                                                icon: "menu"
+                                        TwoLineAvatarIconListItem:
+                                            text: "Spaced out"
+                                            secondary_text: "Khalil wakes up and finds"
+                                            ImageLeftWidget:
+                                                source: "https://picsum.photos/id/46/280/350"
+
+                                            IconRightWidget:
+                                                icon: "menu"
+
+                                        TwoLineAvatarIconListItem:
+                                            text: "Spaced out"
+                                            secondary_text: "Khalil wakes up and finds"
+                                            ImageLeftWidget:
+                                                source: "https://picsum.photos/id/46/280/350"
+
+                                            IconRightWidget:
+                                                icon: "menu"
+                                        TwoLineAvatarIconListItem:
+                                            text: "Spaced out"
+                                            secondary_text: "Khalil wakes up and finds"
+                                            ImageLeftWidget:
+                                                source: "https://picsum.photos/id/46/280/350"
+
+                                            IconRightWidget:
+                                                icon: "menu"
+
+
+
+                    MDBottomNavigationItem:
+                        name: 'screen 3'
+                        icon: 'plus'
+                        on_tab_press: root.changetitle("OWNER")
+                        #badge_icon: "numeric-10"
+                        
+                        MDLabel:
+                            text: 'Janiel Paul O Repas'
+                            halign: 'center'
+                            font_size: '55sp'
+                            theme_text_color: "Custom"
+                            text_color: app.theme_cls.primary_color
+
+                    MDBottomNavigationItem:
+                        name: 'screen 4'
+                        icon: 'message-processing-outline'
+                        on_tab_press: root.changetitle("MESSAGES")
+                        #badge_icon: "numeric-10"
+                
+                        ScrollView:
+                            do_scroll_y: True
+                            do_scroll_x: False
+                            
+                            
+                            MDList:
+                                text: "Single-line item with avatar"
+                                secondary_text: "Khalil wakes up and finds"   
+                            
+                                TwoLineAvatarIconListItem:
+                                    text: "Spaced out"
+                                    secondary_text: "Khalil wakes up and finds"
+                                                                            
+                                    ImageLeftWidget:
+                                        source: "https://picsum.photos/id/46/280/350"
+
+                                    IconRightWidget:
+                                        icon: "menu"
+
+                                TwoLineAvatarIconListItem:
+                                    text: "Spaced out"
+                                    secondary_text: "Khalil wakes up and finds"
+                                    ImageLeftWidget:
+                                        source: "https://picsum.photos/id/46/280/350"
+
+                                    IconRightWidget:
+                                        icon: "menu"
+
+                                TwoLineAvatarIconListItem:
+                                    text: "Spaced out"
+                                    secondary_text: "Khalil wakes up and finds"
+                                    ImageLeftWidget:
+                                        source: "https://picsum.photos/id/46/280/350"
+
+                                    IconRightWidget:
+                                        icon: "menu"
+
+                    MDBottomNavigationItem:
+                        name: 'screen 5'
+                        icon: 'bell-outline'
+                        on_tab_press: root.changetitle("DASHBOARD")
+                        #badge_icon: "numeric-10"
+
+                        FloatLayout:
+
+                            spacing: 100
+
+                            MDRaisedButton:
+                                text: "Create simple snackbar"
+                                font_size: "18sp"
+                                on_release: Snackbar(text="This is a snackbar!").open()
+                                pos_hint: {"center_x": .5, "center_y": .8}
+
+                            MDRaisedButton:
+                                text: "Create custom snackbar"
+                                font_size: "18sp"
+                                on_release: root.open_custom_snackbar()
+                                pos_hint: {"center_x": .5, "center_y": .5}
+
+                            MDRaisedButton:
+                                text: "Create icon snackbar"
+                                font_size: "18sp"
+                                on_release: root.open_icon_snackbar()
+                                pos_hint: {"center_x": .5, "center_y": .2}
+
+
+
+                    

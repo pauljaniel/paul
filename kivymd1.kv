@@ -1,0 +1,96 @@
+<MainLayout>:
+
+    orientation: "vertical"
+
+    MDTopAppBar:
+        title: "Repas"
+        left_action_items: [["menu", lambda x: app.callback()]]
+        right_action_items: [["dots-vertical"],["theme-light-dark", lambda x: root.func(app)]]
+        #md_bg_color: app.theme_cls.accent_color
+        elevation: 4
+        #mode: "free-end"
+    
+ 
+
+    MDBottomNavigation:
+        panel_color: app.theme_cls.primary_color
+        text_color_active: "orange"
+        use_text: True
+        
+
+        MDBottomNavigationItem:
+            name: 'screen 1'
+            text: 'Mail'
+            icon: 'gmail'
+            MDLabel:
+                text: 'Welcome to KivyMD'
+                halign: 'center'
+                font_size: '60'
+        MDBottomNavigationItem:    
+            name: 'screen 2'
+            text: 'Search'
+            icon: 'magnify'
+
+            MDIconButton:
+                icon: "facebook"
+                icon_size: "55sp"
+                halign: 'center'
+                
+            MDFlatButton:
+                text: "Click Me!"
+                icon_size: "24sp" 
+            MDRaisedButton:
+                text: "Submit"
+                icon_size: "24sp" 
+            MDRectangleFlatButton:
+                text: "Hello"
+                icon_size: "24sp"
+                text_color: "white"
+                line_color: app.theme_cls.primary_color
+            MDRectangleFlatButton:
+                icon: "account-alert-outline"
+                theme_icon_color: "Custom"
+                icon_color: "white"
+                line_color: app.theme_cls.primary_color
+                text: "logout"
+            MDFillRoundFlatButton:
+                text: "Submit"
+                font_size: "24sp"
+                text_color: "white"
+            MDRoundFlatButton:
+                text: "Hello"
+                icon_size: "24sp"
+                text_color: "white"
+            MDRoundFlatIconButton:
+                icon: "account-alert-outline"
+                theme_icon_color: "Custom"
+                icon_color: "white"
+                text: "logout"
+                icon_size: "24sp"
+                text_color: "white"
+                
+        MDBottomNavigationItem:    
+            name: 'screen 3'
+            text: 'Add'
+            icon: 'plus'
+            MDLabel:
+                text: 'ADD FRIEND'
+                halign: 'center'
+        MDBottomNavigationItem:    
+            name: 'screen 4'
+            text: 'Message'
+            icon: 'message-processing-outline'
+            MDLabel:
+                text: 'MESSAGES'
+                halign: 'center'
+            
+           
+        MDBottomNavigationItem:    
+            name: 'screen 5'
+            text: 'Notification'
+            icon: 'bell-outline'
+            MDLabel:
+                text: 'NOTIFICATIONS'
+                halign: 'center'
+    
+
